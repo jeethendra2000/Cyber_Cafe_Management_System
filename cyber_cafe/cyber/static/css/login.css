@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url(story.jpg);
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+}
+
+.loginbox {
+    width: 400px;
+    height: 420px;
+    color: #ffff;
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    box-shadow: 8px 8px 50px;
+    padding: 60px 30px;
+}
+
+h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.loginbox input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loginbox input[type="text"],
+input[type="password"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid #ffff;
+    height: 40px;
+    font-size: 16px;
+    color: #000;
+    opacity: 1;
+}
+
+.loginbox input[type="submit"] {
+    border: none;
+    outline: none;
+    background: rgb(0, 255, 242);
+    color: white;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.loginbox input[type="submit"]:hover {
+    cursor: pointer;
+    background: #f66;
+    color: #000;
+}
+
+.loginbox a {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.loginbox a:hover {
+    opacity: 1;
+    color: #ffff;
+}
+
+.bottom {
+    color: orangered;
+}
+
+.bottom input {
+    width: 10%;
+    float: left;
+    font-weight: bold;
+}
+
+.bottom a {
+    float: right;
+    color: orangered;
+    font-weight: bold;
+}
+
+.loginbox input[type="checkbox"] {
+    font-weight: bold;
+}

@@ -1,0 +1,25 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static '/css/index.css' %}">
+{% endblock css%}
+
+{% block content %}
+    <div class="logPage">
+        <div class="topic"><h1>Cyber Cafe Management System</h1></div>
+        <div class="loginbox">
+            <img src="{% static '/images/avatar.jpg' %}" class="avatar">
+            <h1>Admin Login</h1>
+            <form action="" method="POST">
+                <p style="margin-top: 10px;">Username</p>
+                <input type="text" name="" placeholder="Enter username">
+                <p style="margin-top: 20px;">Password</p>
+                <input type="password" name="" placeholder="Enter password">
+                <p class="right"><a href="#">Forgot password?</a></p>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+    
+{% endblock content %}
+
