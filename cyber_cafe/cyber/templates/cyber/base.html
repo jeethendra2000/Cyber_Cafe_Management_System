@@ -11,19 +11,122 @@
      <!-- Compiled and minified CSS -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+     <!-- Font Awesome -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
      <!-- Custom CSS -->
      {% block css %}
      
      {% endblock css%}
-    
+
     <title>Cafe Management System</title>
 
 </head>
 <body>
 
-    {% block content %}
+    <!-- navbar -->
+        
+    <div class="navbar-fixed">
+        <nav class="blue">
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo center">Dashboard</a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>                    
 
-    {% endblock content%}
+                <!-- Dropdown Trigger -->
+                <a href="#" class="right">
+                    <span class="hide-on-med-and-down">Welcome!, Admin</span>
+                    <i class="material-icons dropdown-trigger right" data-target='dropdown1'>account_circle</i>
+                </a>
+                <!-- Dropdown Structure -->
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">person</i>My Profile</a></li>
+                    <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">lock</i>Change Password</a></li>
+                    <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">exit_to_app</i>Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="{% static '/cyber/images/profile_background.jpg'  %}">
+                </div>
+                <a href="#user"><img class="circle" src="{% static '/cyber/images/profile_pic.png'  %}"></a>
+                <a href="#name"><span class="white-text name">name</span></a>
+                <a href="#email"><span class="white-text email">name@gmail.com</span></a>
+            </div>
+        </li>
+
+        <ul class="collapsible">
+            <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text">dashboard</i>Dashboard</a></li>
+
+            <li>
+                <a href="#" class="collapsible-header bold black-text" style="padding-left: 30px;">
+                    <i class="material-icons blue-text">desktop_windows</i>
+                    Computers
+                </a>
+
+                <div class="collapsible-body">
+                    <ul>
+                        <li class="collapsible-header bold black-text" style="padding-left: 20px;">
+                            <a href="#!" class="waves-effect black-text">
+                                <i class="material-icons blue-text">add</i>Add Computer
+                            </a>
+                        </li>
+                        <li class="collapsible-header bold black-text" style="padding-left: 20px;">
+                            <a href="#!" class="waves-effect black-text">
+                                <i class="material-icons blue-text">build</i>Manage Computers
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li>
+                <a href="#" class="collapsible-header bold black-text" style="padding-left: 30px;">
+                    <i class="material-icons blue-text">group</i>
+                    Customers
+                </a>
+
+                <div class="collapsible-body">
+                    <ul>
+                        <li class="collapsible-header bold black-text" style="padding-left: 20px;">
+                            <a href="#!" class="waves-effect black-text">
+                                <i class="material-icons blue-text">person_add</i>Add Customer
+                            </a>
+                        </li>
+                        <li class="collapsible-header bold black-text" style="padding-left: 20px;">
+                            <a href="#!" class="waves-effect black-text">
+                                <i class="material-icons blue-text">shopping_cart</i>Checkout
+                            </a>
+                        </li>
+                        <li class="collapsible-header bold black-text" style="padding-left: 20px;">
+                            <a href="#!" class="waves-effect black-text">
+                                <i class="material-icons blue-text">remove_red_eye</i>View All Customers
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
+        <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text">search</i>Search</a></li>
+        <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text">assignment</i>Report</a></li>
+        <li><div class="divider"></div></li>
+        <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">info</i>About</a></li>
+
+
+    </ul>
+    {% block content %}
+        
+    {% endblock content %}
+    <div class="wrapper container">
+        {% block dashboard %}
+        
+        {% endblock dashboard %}
+    </div>
 
 
 
@@ -34,6 +137,8 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
+    {% block js %}
+     
+    {% endblock js %}
 </body>
 </html>

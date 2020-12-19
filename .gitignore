@@ -1,5 +1,6 @@
 .dist
 env/
+folder/
 *.sqlite3
 __pycache__/
 **/migrations/**
