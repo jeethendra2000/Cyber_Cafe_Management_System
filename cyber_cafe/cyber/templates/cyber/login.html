@@ -24,11 +24,12 @@
         <div class="loginbox">
             <img src="{% static '/cyber/images/avatar.jpg' %}" class="avatar">
             <h1>Admin Login</h1>
-            <form action="" method="POST">
+            <form action="/" method="POST">
+                {% csrf_token %}
                 <p style="margin-top: 10px;">Username</p>
-                <input type="text" name="" placeholder="Enter username">
+                <input type="text" name="AdminId" placeholder="Enter username">
                 <p style="margin-top: 20px;">Password</p>
-                <input type="password" name="" placeholder="Enter password">
+                <input type="password" name="AdminPasswd" placeholder="Enter password">
                 <p class="right"><a href="#">Forgot password?</a></p>
                 <input type="submit" value="Login">
             </form>

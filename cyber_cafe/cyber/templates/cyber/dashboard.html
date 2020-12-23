@@ -3,12 +3,12 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static '/cyber/css/dashboard.css' %}">
-{% endblock css%}
+{% endblock css %}
 
 {% block dashboard %}
     <div class="row">
         <div class="containere">
-            <a href="#">
+            <a href="{% url 'allCustomers' %}">
                 <div class="box col m5 push-m1">
                     <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
                     <div class="content">
@@ -18,7 +18,7 @@
                 </div>
             </a>
             <div class="box col m5 offset-m1 push-m1">
-                <a href="#">
+                <a href="{% url 'computers' %}">
                     <div class="icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>
                     <div class="content">
                         <h3>Total number of Computers</h3>

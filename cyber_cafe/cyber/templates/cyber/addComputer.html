@@ -1,0 +1,54 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static '/cyber/css/addComputers.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<!-- All Computers List -->
+<div class="row wrapper">
+    <div class="col s12 m8 push-m3">
+        <table class="striped centered">
+            <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>ID Proof</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr>
+                <td>Pranav</td>
+                <td>Arsikere</td>
+                <td>pranav@gmail.com</td>
+                <td>6363255811</td>
+                <td>Aadhar Card</td>
+              </tr>
+              <tr>
+                <td>jayanth</td>
+                <td>Hassan</td>
+                <td>jayanth@gmail.com</td>
+                <td>6363255811</td>
+                <td>Aadhar Card</td>
+              </tr>
+              <tr>
+                <td>Shivkumar</td>
+                <td>Gulbarga</td>
+                <td>Shivkumar@gmail.com</td>
+                <td>6363255811</td>
+                <td>Aadhar Card</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+     <script src="{% static '/cyber/js/dashboard.js' %}"></script>
+{% endblock js %}

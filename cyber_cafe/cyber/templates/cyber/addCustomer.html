@@ -1,0 +1,34 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static '/cyber/css/addCustomer.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<!-- All Computers List -->
+<div class="row">
+    <div class="col s12 m8 push-m3">
+        <h1>add customer</h1>
+
+        <div class="row">
+            <form method="POST" action="addCustomer">
+                {% csrf_token %}
+                customerName = <input type="text" name="name">
+                customerAddress = <input type="text" name="address">
+                customerPhoneNumber =  <input type="text" name="ph">
+                customerEmail = <input type="text" name="email">
+                customerIdProof = <input type="text" name="id">
+              <input type="submit">
+            </form>
+        </div>
+        <h2>result = {{result}}</h2>
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+     <script src="{% static '/cyber/js/dashboard.js' %}"></script>
+{% endblock js %}

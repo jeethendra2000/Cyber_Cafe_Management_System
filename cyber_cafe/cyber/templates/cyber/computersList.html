@@ -1,0 +1,42 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static '/cyber/css/computersList.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<!-- All Computers List -->
+<div class="row wrapper">
+    <div class="col s12 m8 push-m3">
+        <table class="striped centered">
+            <thead>
+              <tr>
+                  <th>Computer Name</th>
+                  <th>Computer Location</th>
+                  <th>Date Created</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr>
+                <td>Asus</td>
+                <td>Cabin-1</td>
+                <td>Dec 20, 2020</td>
+              </tr>
+              <tr>
+                <td>HP</td>
+                <td>Cabin-2</td>
+                <td>Dec 22, 2020</td>
+              </tr>
+              <tr>
+                <td>Dell</td>
+                <td>Cabin-3</td>
+                <td>Dec 23, 2020</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock content %}

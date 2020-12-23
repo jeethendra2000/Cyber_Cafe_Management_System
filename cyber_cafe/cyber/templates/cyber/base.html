@@ -29,19 +29,19 @@
     <div class="navbar-fixed">
         <nav class="blue">
             <div class="nav-wrapper container">
-                <a href="#" class="brand-logo center">Dashboard</a>
+                <a href="{% url 'dashboard' %}" class="brand-logo center">Dashboard</a>
                 <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>                    
 
                 <!-- Dropdown Trigger -->
                 <a href="#" class="right">
-                    <span class="hide-on-med-and-down">Welcome!, Admin</span>
+                    <span class="hide-on-med-and-down">Welcome!, {{ user.username }}</span>
                     <i class="material-icons dropdown-trigger right" data-target='dropdown1'>account_circle</i>
                 </a>
                 <!-- Dropdown Structure -->
                 <ul id='dropdown1' class='dropdown-content'>
                     <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">person</i>My Profile</a></li>
                     <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">lock</i>Change Password</a></li>
-                    <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">exit_to_app</i>Logout</a></li>
+                    <li><a href="{% url 'userLogin' %}" class="waves-effect black-text"><i class="material-icons blue-text circle">exit_to_app</i>Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -53,14 +53,14 @@
                 <div class="background">
                     <img src="{% static '/cyber/images/profile_background.jpg'  %}">
                 </div>
-                <a href="#user"><img class="circle" src="{% static '/cyber/images/profile_pic.png'  %}"></a>
-                <a href="#name"><span class="white-text name">name</span></a>
-                <a href="#email"><span class="white-text email">name@gmail.com</span></a>
+                <a href="#user"><img class="circle" src="{{ user.profile.image.url }}"></a>
+                <a href="#name"><span class="white-text name">{{ user.username }}</span></a>
+                <a href="#email"><span class="white-text email">{{ user.email }}</span></a>
             </div>
         </li>
 
         <ul class="collapsible">
-            <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text">dashboard</i>Dashboard</a></li>
+            <li><a href="{% url 'dashboard' %}" class="waves-effect black-text"><i class="material-icons blue-text">dashboard</i>Dashboard</a></li>
 
             <li>
                 <a href="#" class="collapsible-header bold black-text" style="padding-left: 30px;">
@@ -71,7 +71,7 @@
                 <div class="collapsible-body">
                     <ul>
                         <li class="collapsible-header bold black-text" style="padding-left: 20px;">
-                            <a href="#!" class="waves-effect black-text">
+                            <a href="{% url 'addComputer' %}" class="waves-effect black-text">
                                 <i class="material-icons blue-text">add</i>Add Computer
                             </a>
                         </li>
@@ -93,7 +93,7 @@
                 <div class="collapsible-body">
                     <ul>
                         <li class="collapsible-header bold black-text" style="padding-left: 20px;">
-                            <a href="#!" class="waves-effect black-text">
+                            <a href="{% url 'addCustomer' %}" class="waves-effect black-text">
                                 <i class="material-icons blue-text">person_add</i>Add Customer
                             </a>
                         </li>
