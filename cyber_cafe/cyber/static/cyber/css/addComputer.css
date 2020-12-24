@@ -1,0 +1,10 @@
+.row .col .row .col{
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+.row .col .row .col button{
+    background-color: #0987ee;
+    border-radius: 30px;
+    margin-top: 30px;
+    font-weight: 500;
+}

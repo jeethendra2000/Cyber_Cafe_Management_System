@@ -20,21 +20,13 @@
             </thead>
     
             <tbody>
+              {% for computer in computers %}
               <tr>
-                <td>Asus</td>
-                <td>Cabin-1</td>
-                <td>Dec 20, 2020</td>
+                <td>{{computer.computerName}}</td>
+                <td>{{computer.computerLocation}}</td>
+                <td>{{computer.dateAdded}}</td>
               </tr>
-              <tr>
-                <td>HP</td>
-                <td>Cabin-2</td>
-                <td>Dec 22, 2020</td>
-              </tr>
-              <tr>
-                <td>Dell</td>
-                <td>Cabin-3</td>
-                <td>Dec 23, 2020</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
     </div>

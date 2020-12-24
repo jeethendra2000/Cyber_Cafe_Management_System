@@ -41,7 +41,7 @@
                 <ul id='dropdown1' class='dropdown-content'>
                     <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">person</i>My Profile</a></li>
                     <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">lock</i>Change Password</a></li>
-                    <li><a href="{% url 'userLogin' %}" class="waves-effect black-text"><i class="material-icons blue-text circle">exit_to_app</i>Logout</a></li>
+                    <li><a href="{% url 'userLogout' %}" class="waves-effect black-text"><i class="material-icons blue-text circle">exit_to_app</i>Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -76,7 +76,7 @@
                             </a>
                         </li>
                         <li class="collapsible-header bold black-text" style="padding-left: 20px;">
-                            <a href="#!" class="waves-effect black-text">
+                            <a href="{% url 'manageComputer' %}" class="waves-effect black-text">
                                 <i class="material-icons blue-text">build</i>Manage Computers
                             </a>
                         </li>
@@ -137,6 +137,7 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{% static '/cyber/js/main.js' %}"></script>
     {% block js %}
      
     {% endblock js %}

@@ -1,0 +1,49 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+
+{% block css %}
+    <!-- <link rel="stylesheet" href="{% static '/cyber/css/addComputer.css' %}"> -->
+{% endblock css %}
+
+{% block content %}
+
+<!-- All Computers List -->
+<div class="row wrapper">
+    <div class="col s12 m8 push-m3">
+        <h2 class="center">Manage Computers</h2>
+        <table class="striped centered">
+            <thead>
+              <tr>
+                  <th>Computer Name</th>
+                  <th>Computer Location</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              {% for computer in computers %}
+              <tr>
+                <td>{{computer.computerName}}</td>
+                <td>{{computer.computerLocation}}</td>
+                <td>
+                    <button class="btn waves-effect waves-light orange" type="submit" name="action">Edit
+                    <i class="material-icons left">edit</i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn waves-effect waves-light red" type="submit" name="action">Delete
+                        <i class="material-icons left">delete</i>
+                    </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+     <script src="{% static '/cyber/js/dashboard.js' %}"></script>
+{% endblock js %}

@@ -26,7 +26,7 @@ class Customer(models.Model):
     customerEmail = models.CharField(max_length=100, null=True, blank=True)
     # computerChoice
     customerIdProof = models.CharField(max_length=50, null=True, blank=True)
-
+    checkInTime = models.DateTimeField(auto_now_add=True, null=True, blank=False)
     # ~~~~~~On checkout ~~~~~~~
     # price
     # Remarks

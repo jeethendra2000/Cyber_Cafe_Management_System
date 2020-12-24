@@ -13,36 +13,30 @@
         <table class="striped centered">
             <thead>
               <tr>
+                  <th>ID</th>
                   <th>Name</th>
                   <th>Address</th>
                   <th>Email</th>
                   <th>Phone</th>
                   <th>ID Proof</th>
+                  <th>Check In Time</th>
               </tr>
             </thead>
     
             <tbody>
-              <tr>
-                <td>Pranav</td>
-                <td>Arsikere</td>
-                <td>pranav@gmail.com</td>
-                <td>6363255811</td>
-                <td>Aadhar Card</td>
-              </tr>
-              <tr>
-                <td>jayanth</td>
-                <td>Hassan</td>
-                <td>jayanth@gmail.com</td>
-                <td>6363255811</td>
-                <td>Aadhar Card</td>
-              </tr>
-              <tr>
-                <td>Shivkumar</td>
-                <td>Gulbarga</td>
-                <td>Shivkumar@gmail.com</td>
-                <td>6363255811</td>
-                <td>Aadhar Card</td>
-              </tr>
+
+              {% for customer in customers %}
+                <tr>
+                  <td>{{customer.id}}</td>
+                  <td>{{customer.customerName}}</td>
+                  <td>{{customer.customerAddress}}</td>
+                  <td>{{customer.customerEmail}}</td>
+                  <td>{{customer.customerPhoneNumber}}</td>
+                  <td>{{customer.customerIdProof}}</td>
+                  <td>{{customer.checkInTime}}</td>
+                </tr>
+              {% endfor %}
+
             </tbody>
           </table>
     </div>
