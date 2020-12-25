@@ -15,6 +15,12 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
      <!-- Custom CSS -->
+     <style>
+        .sidenav .collapsible-body li a, .sidenav.fixed .collapsible-body li a {
+            padding: 0 0px 0 31px;
+            width: 100%;
+        }
+     </style>
      {% block css %}
      
      {% endblock css%}
@@ -137,9 +143,6 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="{% static '/cyber/js/main.js' %}"></script>
-    {% block js %}
-     
-    {% endblock js %}
+    <script src="{% static 'cyber/js/main.js' %}"></script>
 </body>
 </html>

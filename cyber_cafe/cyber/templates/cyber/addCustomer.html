@@ -4,7 +4,7 @@
 {% block css %}
     <style>
         .row .col .row .col{
-            margin-top: 20px;
+            margin-top: 10px;
         }
         .row .col .row .col button{
             background-color: #05b31c;
@@ -12,45 +12,63 @@
             margin-top: 25px;
             font-weight: 500;
         }
+        
+        .dropdown-content li>a, .dropdown-content li>span {
+            color: black;
+        }
     </style>
 {% endblock css %}
 
 {% block content %}
-
 <!-- All Computers List -->
 <div class="row">
     <div class="col s12 m8 push-m3">
+        <h2 class="center">Add Customer</h2>
         <div class="row">
-            <form class="col s10 push-s1" action="addCustomer" method="POST">
+            <form class="col s10 push-s1" action="{% url 'addCustomer' %}" method="POST">
               {% csrf_token %}
               <div class="row">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">person</i>
-                  <input id="icon_prefix" type="text" class="validate" name="name">
+                  <input id="icon_prefix" type="text" class="validate" required="" aria-required="true" name="name">
                   <label for="icon_prefix">Name</label>
+                  <span class="helper-text" data-error="wrong" data-success="right">*required</span>
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">place</i>
                     <textarea id="textarea1" class="materialize-textarea" name="address"></textarea>
                     <label for="textarea1">Address</label>
                 </div>
-                <div class="input-field col s12">
+                <div class="input-field col s6">
                     <i class="material-icons prefix">mail</i>
                     <input id="email" type="email" class="validate" name="email">
                     <label for="email">Email</label>
-                    <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+                    <!-- <span class="helper-text" data-error="wrong" data-success="right">Helper text</span> -->
                 </div>
-                <div class="input-field col s12">
+                <div class="input-field col s6">
                     <i class="material-icons prefix">phone</i>
-                    <input id="icon_telephone" type="tel" class="validate" name="ph">
+                    <input id="icon_telephone" type="tel" class="validate" required="" aria-required="true" name="ph">
                     <label for="icon_telephone">Telephone</label>
+                    <span class="helper-text" data-error="wrong" data-success="right">*required</span>
                 </div>
-                <div class="input-field col s12">
+
+                <div class="input-field col s6">
+                    <select name="computer">
+                      <option value="" disabled selected>Select Computer</option>
+                      {% for computer in computers%}
+                        {% if computer.availability %}
+                        <option value="{{computer.id}}">{{computer.computerName}}, {{computer.computerLocation}}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                    <label>Available Computer</label>
+                  </div>
+                  <div class="input-field col s6">
                     <i class="material-icons prefix">card_membership</i>
                     <textarea id="textarea2" class="materialize-textarea" name="id"></textarea>
                     <label for="textarea2">Id Proof</label>
                 </div>
-                <!-- <div class="input-field col s12">
+                <!-- <div class="input-field col s6">
                     <select class="browser-default">
                         <option value="" disabled selected>Choose your option</option>
                         <option value="1">Option 1</option>

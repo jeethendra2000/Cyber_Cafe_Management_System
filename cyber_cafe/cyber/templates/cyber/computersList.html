@@ -9,10 +9,11 @@
 
 <!-- All Computers List -->
 <div class="row wrapper">
-    <div class="col s12 m8 push-m3">
+    <div class="col s12 m8 push-m3" style="margin-left: 25px;">
         <table class="striped centered">
             <thead>
               <tr>
+                  <th>ID</th>
                   <th>Computer Name</th>
                   <th>Computer Location</th>
                   <th>Date Created</th>
@@ -22,6 +23,7 @@
             <tbody>
               {% for computer in computers %}
               <tr>
+                <td>{{computer.id}}</td>
                 <td>{{computer.computerName}}</td>
                 <td>{{computer.computerLocation}}</td>
                 <td>{{computer.dateAdded}}</td>

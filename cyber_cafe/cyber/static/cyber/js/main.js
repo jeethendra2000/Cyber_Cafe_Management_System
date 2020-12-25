@@ -6,4 +6,5 @@ $(document).ready(function(){
         'constrainWidth' : false,
     });
     $('select').formSelect();
+    $('.modal').modal();
 });

@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from . models import Customer, Computer
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+
+def demo(request):
+    return render(request, 'cyber/demo.html')
 
 # Create your views here.
 def userLogin(request):
@@ -42,9 +45,6 @@ def allCustomers(request):
     customers = Customer.objects.all()
     return render(request, 'cyber/allCustomers.html', {'customers': customers})
 
-@login_required
-def demo(request):
-    return render(request, 'cyber/demo.html')
 
 @login_required
 def addComputer(request):
@@ -61,12 +61,24 @@ def manageComputer(request):
     return render(request, 'cyber/manageComputer.html', {'computers': computers})
 
 @login_required
-def editComputer(request):
-    pass
+def updateComputer(request, id):
+    if request.method == 'POST':
+        obj = Computer.objects.get(pk=id)
+        obj.computerName = request.POST.get('computerName')
+        obj.computerLocation = request.POST.get('computerLocation')
+        obj.save()
+        # return HttpResponseRedirect('../manageComputer')
+        return redirect('manageComputer')
+
+    return HttpResponseRedirect('../manageComputer')
 
 @login_required
-def deleteComputer(request):
-    pass
+def deleteComputer(request, id):
+    if request.method == 'POST':
+        obj = Computer.objects.get(pk=id)
+        obj.delete()
+        return HttpResponseRedirect('../manageComputer')
+    return HttpResponseRedirect('../manageComputer')
 
 @login_required
 def addCustomer(request):
@@ -75,10 +87,16 @@ def addCustomer(request):
         address = request.POST.get('address')
         ph = request.POST.get('ph')
         email = request.POST.get('email')
+        computerId = request.POST.get('computer')
         id = request.POST.get('id')
-        obj = Customer(customerName=name, customerAddress=address, customerPhoneNumber=ph, customerEmail=email, customerIdProof=id)
+        computer = Computer.objects.get(id=computerId)
+        computer.availability = False
+        computer.save()
+        obj = Customer(customerName=name, customerAddress=address, customerPhoneNumber=ph, customerEmail=email, computerChoice=computerId, customerIdProof=id)
         obj.save()
-    return render(request, 'cyber/addCustomer.html')
+        
+    computers = Computer.objects.all()
+    return render(request, 'cyber/addCustomer.html', {'computers':computers})
 
 @login_required
 def checkoutCustomer(request):

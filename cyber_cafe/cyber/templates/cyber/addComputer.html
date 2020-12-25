@@ -17,13 +17,15 @@
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">computer</i>
-              <input id="icon_prefix" type="text" class="validate" name="computerName">
+              <input id="icon_prefix" type="text" class="validate" required="" aria-required="true" name="computerName">
               <label for="icon_prefix">Computer Name</label>
+              <span class="helper-text" data-error="wrong" data-success="right">*required</span>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">place</i>
-              <input id="icon_telephone" type="tel" class="validate" name="computerLocation">
+              <input id="icon_telephone" type="tel" class="validate" required="" aria-required="true" name="computerLocation">
               <label for="icon_telephone">Computer Location</label>
+              <span class="helper-text" data-error="wrong" data-success="right">*required</span>
             </div>
             <div class="center">
               <button class="btn waves-effect waves-light" type="submit" name="action">submit
@@ -36,7 +38,3 @@
     </div>
 </div>
 {% endblock content %}
-
-{% block js %}
-     <script src="{% static '/cyber/js/dashboard.js' %}"></script>
-{% endblock js %}
