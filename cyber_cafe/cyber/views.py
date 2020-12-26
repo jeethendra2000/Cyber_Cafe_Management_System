@@ -3,10 +3,16 @@ from . models import Customer, Computer
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from datetime import datetime
+from django.core.paginator import Paginator
 
 def demo(request):
-    return render(request, 'cyber/demo.html')
+    c = Customer.objects.all()
+    paginator = Paginator(c, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'cyber/demo.html', {'page_obj': page_obj})
 
 # Create your views here.
 def userLogin(request):
@@ -40,11 +46,6 @@ def computers(request):
     computers = Computer.objects.all()
     return render(request, 'cyber/computersList.html', {'computers': computers})
 
-@login_required
-def allCustomers(request):
-    customers = Customer.objects.all()
-    return render(request, 'cyber/allCustomers.html', {'customers': customers})
-
 
 @login_required
 def addComputer(request):
@@ -58,7 +59,11 @@ def addComputer(request):
 @login_required
 def manageComputer(request):
     computers = Computer.objects.all()
-    return render(request, 'cyber/manageComputer.html', {'computers': computers})
+    paginator = Paginator(computers, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'cyber/manageComputer.html', {'page_obj': page_obj})
 
 @login_required
 def updateComputer(request, id):
@@ -98,9 +103,54 @@ def addCustomer(request):
     computers = Computer.objects.all()
     return render(request, 'cyber/addCustomer.html', {'computers':computers})
 
+
 @login_required
-def checkoutCustomer(request):
-    pass
+def checkout(request):
+    customers = Customer.objects.all()
+    return render(request, 'cyber/checkout.html', {'customers': customers} )
+
+
+@login_required
+def checkoutCustomer(request, id):
+    customer = Customer.objects.get(pk=id)
+    return render(request, 'cyber/checkoutCustomer.html', {'customer' : customer})
+
+
+    # customer.checkOutTime = datetime.now()
+    # customer.checkInStatus = False
+    # computerAlloted = customer.computerChoice
+
+    # computer = Computer.objects.get(pk=computerAlloted)
+    # computer.availability = True
+    # computer.save()
+
+    # timeDifference = customer.checkOutTime-customer.checkInTime
+    # minutes = timeDifference.total_seconds() / 60
+    # hours = minutes / 60
+    # customer.duration = timeDifference
+    # print(customer.duration)
+
+    # customer.save()
+    # print(customer.checkInTime)
+
+    # print(f"Difference = {timeDifference}")
+    # print(f"Difference in Minutes = {int(minutes) - int(hours)*60}")
+    # print(f"Difference in Hours = {int(hours)}")
+
+@login_required
+def allCustomer(request):
+    customers = Customer.objects.all()
+    paginator = Paginator(customers, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'cyber/allCustomer.html', {'page_obj': page_obj} )
+
+
+@login_required
+def customerBill(request, id):
+    customer= Customer.objects.get(pk=id)
+    return render(request, 'cyber/customerBill.html', {'customer': customer} )
 
 @login_required
 def about(request):

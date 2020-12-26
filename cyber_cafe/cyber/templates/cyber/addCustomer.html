@@ -53,11 +53,11 @@
                 </div>
 
                 <div class="input-field col s6">
-                    <select name="computer">
+                    <select name="computer" class="validate" required="" aria-required="true">
                       <option value="" disabled selected>Select Computer</option>
                       {% for computer in computers%}
                         {% if computer.availability %}
-                        <option value="{{computer.id}}">{{computer.computerName}}, {{computer.computerLocation}}</option>
+                          <option value="{{computer.id}}">{{computer.computerName}}, {{computer.computerLocation}}</option>
                         {% endif %}
                       {% endfor %}
                     </select>
@@ -68,14 +68,7 @@
                     <textarea id="textarea2" class="materialize-textarea" name="id"></textarea>
                     <label for="textarea2">Id Proof</label>
                 </div>
-                <!-- <div class="input-field col s6">
-                    <select class="browser-default">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                </div> -->
+
                 <div class="center">
                   <button class="btn waves-effect waves-light" type="submit" name="action">Add
                     <i class="material-icons left">add</i>

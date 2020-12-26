@@ -14,6 +14,7 @@
         <table class="striped centered">
             <thead>
               <tr>
+                  <th>SL.NO</th>
                   <th>Computer Name</th>
                   <th>Computer Location</th>
                   <th>Update</th>
@@ -22,8 +23,9 @@
             </thead>
     
             <tbody>
-              {% for computer in computers %}
+              {% for computer in page_obj %}
               <tr>
+                <td>{{forloop.counter}}</td>
                 <td>{{computer.computerName}}</td>
                 <td>{{computer.computerLocation}}</td>
                 <td class="center">
@@ -97,6 +99,23 @@
               {% endfor %}
             </tbody>
           </table>
+          
+        <ul class="pagination center">
+
+          {% if page_obj.has_previous %}
+          <li class="waves-effect"><a href="?page=1"><i class="material-icons">first_page</i></a></li>
+          <li class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+          {% endif %}
+
+          <li class="waves-effect active"><a href="#!">{{ page_obj.number }}</a></li>
+          <li><a>of</a></li>
+          <li class="waves-effect active"><a href="#!">{{ page_obj.paginator.num_pages }}</a></li>
+
+          {% if page_obj.has_next %}
+          <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+          <li class="waves-effect"><a href="?page={{ page_obj.paginator.num_pages }}"><i class="material-icons">last_page</i></a></li>
+          {% endif %}
+      </ul>
     </div>
 </div>
 {% endblock content %}

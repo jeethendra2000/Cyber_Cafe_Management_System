@@ -20,6 +20,9 @@
             padding: 0 0px 0 31px;
             width: 100%;
         }
+        table.striped>tbody>tr:nth-child(odd) {
+            background-color: rgba(214, 213, 213, 0.5);
+        }
      </style>
      {% block css %}
      
@@ -104,12 +107,12 @@
                             </a>
                         </li>
                         <li class="collapsible-header bold black-text" style="padding-left: 20px;">
-                            <a href="#!" class="waves-effect black-text">
+                            <a href="{% url 'checkout' %}" class="waves-effect black-text">
                                 <i class="material-icons blue-text">shopping_cart</i>Checkout
                             </a>
                         </li>
                         <li class="collapsible-header bold black-text" style="padding-left: 20px;">
-                            <a href="#!" class="waves-effect black-text">
+                            <a href="{% url 'allCustomer' %}" class="waves-effect black-text">
                                 <i class="material-icons blue-text">remove_red_eye</i>View All Customers
                             </a>
                         </li>

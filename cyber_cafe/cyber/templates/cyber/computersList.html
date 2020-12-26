@@ -2,7 +2,19 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static '/cyber/css/computersList.css' %}">
+  <style>
+    .wrapper{
+      margin-left: 8px;
+      margin-top: 0px;
+    }
+
+    @media screen and (max-width:920px){
+      .wrapper{
+          margin-left: 0px;
+          margin-top: 5px;
+      }
+    }
+  </style>
 {% endblock css %}
 
 {% block content %}
@@ -10,9 +22,11 @@
 <!-- All Computers List -->
 <div class="row wrapper">
     <div class="col s12 m8 push-m3" style="margin-left: 25px;">
+      <h2 class="center">All Computers</h2>
         <table class="striped centered">
             <thead>
               <tr>
+                  <th>SL.NO</th>
                   <th>ID</th>
                   <th>Computer Name</th>
                   <th>Computer Location</th>
@@ -23,6 +37,7 @@
             <tbody>
               {% for computer in computers %}
               <tr>
+                <td>{{forloop.counter}}</td>
                 <td>{{computer.id}}</td>
                 <td>{{computer.computerName}}</td>
                 <td>{{computer.computerLocation}}</td>

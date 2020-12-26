@@ -7,4 +7,5 @@ $(document).ready(function(){
     });
     $('select').formSelect();
     $('.modal').modal();
+    $('input#input_text, textarea#textarea2').characterCounter();
 });

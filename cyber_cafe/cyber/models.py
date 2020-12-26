@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
 # Create your models here.
 
 class Profile(models.Model):
@@ -48,6 +47,10 @@ class Customer(models.Model):
     computerChoice = models.CharField( max_length=100, null=True, blank=False)
     customerIdProof = models.CharField(max_length=50, null=True, blank=True)
     checkInTime = models.DateTimeField(auto_now_add=True, null=True, blank=False)
+    checkInStatus = models.BooleanField(default=True)
+    checkOutTime = models.DateField(auto_now_add=True, null=True, blank=False)
+    duration = models.CharField(max_length=100, null=True, blank=False)
+
     # ~~~~~~On checkout ~~~~~~~
     # price
     # Remarks
