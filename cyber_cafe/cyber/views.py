@@ -1,10 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
-from . models import Customer, Computer
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
+from . models import Customer, Computer, Price
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from datetime import datetime
+from django import template
+
+register = template.Library()
+
+@register.filter
+def duration(td):
+    total_seconds = int(td.total_seconds())
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+
+    return '{} hours {} min'.format(hours, minutes)
+
 
 def demo(request):
     c = Customer.objects.all()
@@ -31,15 +43,29 @@ def userLogout(request):
     return redirect('userLogin')
 
 
+
 @login_required
 def dashboard(request):
     computerCount = Computer.objects.all().count()
     customerCount = Customer.objects.all().count()
+    charges = Price.objects.get(pk=1)
     count = {
         'computerCount' : computerCount,
-        'customerCount' : customerCount
+        'customerCount' : customerCount,
+        'price' : charges.price,
     }
     return render(request, 'cyber/dashboard.html', count)
+
+@login_required
+def price(request):
+    if request.method == "POST":
+        temp = request.POST.get('price')
+        if temp != "":
+            charges = Price.objects.get(pk=1)
+            charges.price = int(temp)
+            charges.save()
+    return redirect('dashboard')
+
 
 @login_required
 def computers(request):
@@ -72,7 +98,6 @@ def updateComputer(request, id):
         obj.computerName = request.POST.get('computerName')
         obj.computerLocation = request.POST.get('computerLocation')
         obj.save()
-        # return HttpResponseRedirect('../manageComputer')
         return redirect('manageComputer')
 
     return HttpResponseRedirect('../manageComputer')
@@ -113,29 +138,40 @@ def checkout(request):
 @login_required
 def checkoutCustomer(request, id):
     customer = Customer.objects.get(pk=id)
+    charges = Price.objects.get(pk=1)
+    computerAlloted = customer.computerChoice
+    computer = Computer.objects.get(pk=computerAlloted)
+    
+    if not customer.checkOutStatus:
+        customer.computerUsedName = f'{computer.computerName}, {computer.computerLocation}'
+        customer.checkOutTime = datetime.now()
+        timeDifference = customer.checkOutTime-customer.checkInTime
+        customer.duration = duration(timeDifference)
+        customer.charge = (((int(timeDifference.total_seconds()) // 60) // 30) + 1) * charges.price
+        customer.save()
+    
     return render(request, 'cyber/checkoutCustomer.html', {'customer' : customer})
 
+@login_required
+def checkoutConfirm(request, id):
+    if request.method == 'POST':
+        remark = request.POST.get('remark')
+        customer = Customer.objects.get(pk=id)
+        if remark != "":
+            customer.remarks = remark
 
-    # customer.checkOutTime = datetime.now()
-    # customer.checkInStatus = False
-    # computerAlloted = customer.computerChoice
+        computerAlloted = customer.computerChoice
+        computer = Computer.objects.get(pk=computerAlloted)
+        computer.availability = True
+        computer.save()
 
-    # computer = Computer.objects.get(pk=computerAlloted)
-    # computer.availability = True
-    # computer.save()
+        customer.checkOutStatus = True
+        customer.checkInStatus = False
+        customer.save()
 
-    # timeDifference = customer.checkOutTime-customer.checkInTime
-    # minutes = timeDifference.total_seconds() / 60
-    # hours = minutes / 60
-    # customer.duration = timeDifference
-    # print(customer.duration)
+    return redirect('checkout')
 
-    # customer.save()
-    # print(customer.checkInTime)
 
-    # print(f"Difference = {timeDifference}")
-    # print(f"Difference in Minutes = {int(minutes) - int(hours)*60}")
-    # print(f"Difference in Hours = {int(hours)}")
 
 @login_required
 def allCustomer(request):

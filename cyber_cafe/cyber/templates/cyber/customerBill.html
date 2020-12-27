@@ -32,7 +32,7 @@
 <!-- All Computers List -->
 <div class="row wrapper">
     <div class="col s12 m8 push-m3 gap2">
-        <h4 class="center">Checkout {{ customer.customerName}}</h4>
+        <h4 class="center">Customer - {{ customer.customerName|capfirst}}</h4>
 
           <div class="row grey lighten-2">
               <div class="col s10 push-s1 white" style="margin: 50px 0px;">
@@ -106,13 +106,24 @@
                     </div>
                     <div class="row gap">
                         <div class="col s4">
-                            <h6>Computer Used</h6>
+                            <h6>Computer ID</h6>
                         </div>
                         <div class="col s1">
                             <h6>:</h6>
                         </div>
                         <div class="col s7">
                             <h6>{{customer.computerChoice}}</h6>
+                        </div>
+                    </div>
+                    <div class="row gap">
+                        <div class="col s4">
+                            <h6>Computer Used</h6>
+                        </div>
+                        <div class="col s1">
+                            <h6>:</h6>
+                        </div>
+                        <div class="col s7">
+                            <h6>{{customer.computerUsedName}}</h6>
                         </div>
                     </div>
                     <div class="row gap">
@@ -156,7 +167,7 @@
                             <h6>:</h6>
                         </div>
                         <div class="col s7">
-                            <h6>₹40 rupees </h6>
+                            <h6>₹{{customer.charge}} rupees </h6>
                         </div>
                     </div>
                     <div class="row gap" style="margin-bottom: 0px !important;">
@@ -168,13 +179,13 @@
                         </div>
                         <div class="col s7">
                             <p>
-                                Received
+                                {{customer.remarks}}
                             </p>
                         </div>
                         <div class="row gap3 center">
                             <div class="col s12" style="margin-top: 50px;">
                                 <a href="{% url 'allCustomer' %}">
-                                    <button class="btn waves-effect waves-light green">Back
+                                    <button class="btn waves-effect waves-light orange">Back
                                         <i class="material-icons left">arrow_back</i>
                                     </button>
                                 </a>

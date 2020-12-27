@@ -11,6 +11,7 @@ urlpatterns = [
     path('', views.userLogin, name='userLogin'),
     path('userLogout', views.userLogout, name='userLogout'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/price', views.price, name='price'),
     path('dashboard/computers', views.computers, name='computers'),
     path('dashboard/addComputer', views.addComputer, name='addComputer'),
     path('dashboard/updateComputer/<str:id>', views.updateComputer, name='updateComputer'),
@@ -19,6 +20,7 @@ urlpatterns = [
     path('dashboard/addCustomer', views.addCustomer, name='addCustomer'),
     path('dashboard/checkout', views.checkout, name='checkout'),
     path('dashboard/checkoutCustomer/<str:id>', views.checkoutCustomer, name='checkoutCustomer'),
+    path('dashboard/checkoutConfirm/<str:id>', views.checkoutConfirm, name='checkoutConfirm'),
     path('dashboard/allCustomer', views.allCustomer, name='allCustomer'),
     path('dashboard/customerBill/<str:id>', views.customerBill, name='customerBill'),
 
