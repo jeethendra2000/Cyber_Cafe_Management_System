@@ -1,0 +1,60 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block content %}
+
+<!-- All Computers List -->
+<div class="row wrapper">
+    <div class="col s12 m8 push-m3">
+        <h2 class="center">All Customers</h2>
+        <table class="striped centered" style="margin-left: 35px;">
+            <thead>
+              <tr>
+                  <th>SL.NO</th>
+                  <th>Customer ID</th>
+                  <th>Customer Name</th>
+                  <th>Phone Number</th>
+                  <th>Bill</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              {% for customer in page_obj %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{customer.id}}</td>
+                        <td>{{customer.customerName}}</td>
+                        <td>{{customer.customerPhoneNumber}}</td>
+                        <td>
+                            <a href="{% url 'customerBill' customer.id %}" class="btn green" style="text-transform: capitalize;">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <ul class="pagination center">
+
+            {% if page_obj.has_previous %}
+            <li class="waves-effect"><a href="?page=1"><i class="material-icons">first_page</i></a></li>
+            <li class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+            {% endif %}
+
+            <li class="waves-effect active"><a href="#!">{{ page_obj.number }}</a></li>
+            <li><a>of</a></li>
+            <li class="waves-effect active"><a href="#!">{{ page_obj.paginator.num_pages }}</a></li>
+
+            {% if page_obj.has_next %}
+            <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+            <li class="waves-effect"><a href="?page={{ page_obj.paginator.num_pages }}"><i class="material-icons">last_page</i></a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}

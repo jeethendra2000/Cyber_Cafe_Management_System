@@ -1,0 +1,65 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static '/cyber/css/dashboard.css' %}">
+    <style>
+        .containere {
+            position: relative;
+            /* width: 1200px; */
+            width: 100%;
+            height: 295px;
+            margin: 80px auto;
+        }
+    </style>
+{% endblock css %}
+
+{% block dashboard %}
+    <div class="row">
+        <div class="containere">
+            <a href="{% url 'allCustomer' %}">
+                <div class="box col m5 push-m1">
+                    <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                    <div class="content">
+                        <h3>Total number of Customers</h3>
+                        <h3>{{customerCount}}</h3>
+                    </div>
+                </div>
+            </a>
+            <div class="box col m5 offset-m1 push-m1">
+                <a href="{% url 'computers' %}">
+                    <div class="icon"><i class="fa fa-desktop" aria-hidden="true"></i></div>
+                    <div class="content">
+                        <h3>Total number of Computers</h3>
+                        <h3>{{computerCount}}</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m6 push-m1">
+                <h5>Current Charges : (min. ₹{{price}} / 30min)</h5>
+            </div>
+            <div class="col s12 m6 push-m1">
+                <form action="price" method="POST">
+                    {% csrf_token %}
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_balance_wallet</i>
+                        <input id="icon_prefix" type="text" class="validate" name="price">
+                        <label for="icon_prefix">Rupees</label>
+                        <span class="helper-text" data-error="wrong" data-success="right">Change Charges</span>
+                    </div>
+                    <div class="input-field col s6">
+                        <button class="btn waves-effect waves-light green" type="submit" style="text-transform: capitalize;" name="action">Change
+                            <i class="material-icons right large">change_circle</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock dashboard %}

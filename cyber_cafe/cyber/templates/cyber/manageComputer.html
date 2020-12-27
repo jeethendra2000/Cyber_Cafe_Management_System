@@ -1,0 +1,121 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+
+{% block css %}
+    <!-- <link rel="stylesheet" href="{% static '/cyber/css/addComputer.css' %}"> -->
+{% endblock css %}
+
+{% block content %}
+
+<!-- All Computers List -->
+<div class="row wrapper">
+    <div class="col s12 m8 push-m3">
+        <h2 class="center">Manage Computers</h2>
+        <table class="striped centered">
+            <thead>
+              <tr>
+                  <th>SL.NO</th>
+                  <th>Computer Name</th>
+                  <th>Computer Location</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              {% for computer in page_obj %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{computer.computerName}}</td>
+                <td>{{computer.computerLocation}}</td>
+                <td class="center">
+                  <!-- Modal Trigger -->
+                  <a class="waves-effect waves-light btn modal-trigger orange"  style="text-transform:capitalize;"  href="#modal1.{{computer.id}}"><i class="material-icons left">edit</i>Edit</a>
+
+                  <!-- Modal Structure -->
+                  <div id="modal1.{{computer.id}}" class="modal">
+                    <div class="modal-content">
+                      <h2>Update Details</h2>
+                      <form class="col s10 push-s1" action="{% url 'updateComputer' computer.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <i class="material-icons prefix">computer</i>
+                            <input id="icon_prefix" type="text" class="validate" required="" aria-required="true" name="computerName">
+                            <label for="icon_prefix">Computer Name</label>
+                          </div>
+                          <div class="input-field col s12">
+                            <i class="material-icons prefix">place</i>
+                            <input id="icon_telephone" type="tel" class="validate" required="" aria-required="true" name="computerLocation">
+                            <label for="icon_telephone">Computer Location</label>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top: 50px;">
+                          <div class="col s5 push-s1">
+                            <button class="btn modal-close waves-effect waves-light blue darken-1" type="submit" name="action" style="text-transform:capitalize;">cancel
+                              <i class="material-icons left">cancel</i>
+                            </button>
+                          </div>
+                            <div class="col s5 push-s1">
+                                <button class="btn waves-effect waves-light green" style="text-transform:capitalize;" type="submit" name="action">Update
+                                  <i class="material-icons left">done</i>
+                                </button>
+                            </div>
+                        </div>
+                      </form>
+
+                    </div>
+                  </div>
+                </td>
+                <td class="center">
+                    <!-- Modal Trigger -->
+                    <a class="waves-effect waves-light btn modal-trigger red"  style="text-transform:capitalize;" href="#modal2.{{computer.id}}"><i class="material-icons left">delete</i>Delete</a>
+
+                    <!-- Modal Structure -->
+                    <div id="modal2.{{computer.id}}" class="modal">
+                      <div class="modal-content">
+                        <i class="material-icons large red-text">error</i>
+                        <h4>Are You Sure?</h4>
+                        <p>You want to Remove this Computer!</p>
+                        <div class="row" style="margin-top: 50px;">
+                          <div class="col s5 push-s1">
+                            <button class="btn modal-close waves-effect waves-light blue darken-1" type="submit" name="action" style="text-transform:capitalize;">cancel
+                              <i class="material-icons left">cancel</i>
+                            </button>
+                          </div>
+                            <div class="col s5 push-s1">
+                                <form action="{% url 'deleteComputer' computer.id %}" method="POST">
+                                  {% csrf_token %}
+                                  <button class="btn waves-effect waves-light red" style="text-transform:capitalize;" type="submit" name="action">Confirm
+                                    <i class="material-icons left">done</i>
+                                  </button>                            
+                                </form>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          
+        <ul class="pagination center">
+
+          {% if page_obj.has_previous %}
+          <li class="waves-effect"><a href="?page=1"><i class="material-icons">first_page</i></a></li>
+          <li class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+          {% endif %}
+
+          <li class="waves-effect active"><a href="#!">{{ page_obj.number }}</a></li>
+          <li><a>of</a></li>
+          <li class="waves-effect active"><a href="#!">{{ page_obj.paginator.num_pages }}</a></li>
+
+          {% if page_obj.has_next %}
+          <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+          <li class="waves-effect"><a href="?page={{ page_obj.paginator.num_pages }}"><i class="material-icons">last_page</i></a></li>
+          {% endif %}
+      </ul>
+    </div>
+</div>
+{% endblock content %}

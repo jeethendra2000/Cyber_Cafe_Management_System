@@ -1,0 +1,8 @@
+.dist
+env/
+folder/
+*.sqlite3
+__pycache__/
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
