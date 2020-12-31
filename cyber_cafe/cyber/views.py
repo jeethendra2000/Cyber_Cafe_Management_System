@@ -18,14 +18,6 @@ def duration(td):
     return '{} hours {} min'.format(hours, minutes)
 
 
-def demo(request):
-    c = Customer.objects.all()
-    paginator = Paginator(c, 10)
-
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'cyber/demo.html', {'page_obj': page_obj})
-
 # Create your views here.
 def userLogin(request):
     adminId = request.POST.get('AdminId')
@@ -42,7 +34,8 @@ def userLogout(request):
     logout(request)
     return redirect('userLogin')
 
-
+def error(request):
+    return render(request, 'cyber/error.html')
 
 @login_required
 def dashboard(request):
@@ -82,6 +75,7 @@ def addComputer(request):
         obj.save()
     return render(request, 'cyber/addComputer.html')
 
+
 @login_required
 def manageComputer(request):
     computers = Computer.objects.all()
@@ -89,7 +83,11 @@ def manageComputer(request):
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'cyber/manageComputer.html', {'page_obj': page_obj})
+    if computers.count():
+        return render(request, 'cyber/manageComputer.html', {'page_obj': page_obj})
+    else:
+        return render(request, 'cyber/managecomputer.html', {'NC': True})
+
 
 @login_required
 def updateComputer(request, id):
@@ -106,8 +104,11 @@ def updateComputer(request, id):
 def deleteComputer(request, id):
     if request.method == 'POST':
         obj = Computer.objects.get(pk=id)
-        obj.delete()
-        return HttpResponseRedirect('../manageComputer')
+        if obj.availability:
+            obj.delete()
+            return HttpResponseRedirect('../manageComputer')
+        else:
+            return redirect('manageComputer')
     return HttpResponseRedirect('../manageComputer')
 
 @login_required
@@ -120,9 +121,10 @@ def addCustomer(request):
         computerId = request.POST.get('computer')
         id = request.POST.get('id')
         computer = Computer.objects.get(id=computerId)
+        computerUsed = f'{computer.computerName}, {computer.computerLocation}'
         computer.availability = False
         computer.save()
-        obj = Customer(customerName=name, customerAddress=address, customerPhoneNumber=ph, customerEmail=email, computerChoice=computerId, customerIdProof=id)
+        obj = Customer(customerName=name, customerAddress=address, customerPhoneNumber=ph, customerEmail=email, computerChoice=computerId, computerUsedName=computerUsed, customerIdProof=id)
         obj.save()
         
     computers = Computer.objects.all()
@@ -137,19 +139,23 @@ def checkout(request):
 
 @login_required
 def checkoutCustomer(request, id):
-    customer = Customer.objects.get(pk=id)
-    charges = Price.objects.get(pk=1)
-    computerAlloted = customer.computerChoice
-    computer = Computer.objects.get(pk=computerAlloted)
-    
-    if not customer.checkOutStatus:
-        customer.computerUsedName = f'{computer.computerName}, {computer.computerLocation}'
-        customer.checkOutTime = datetime.now()
-        timeDifference = customer.checkOutTime-customer.checkInTime
-        customer.duration = duration(timeDifference)
-        customer.charge = (((int(timeDifference.total_seconds()) // 60) // 30) + 1) * charges.price
-        customer.save()
-    
+    try:
+        customer = Customer.objects.get(pk=id)
+        charges = Price.objects.get(pk=1)
+        computerAlloted = customer.computerChoice
+        computer = Computer.objects.get(pk=computerAlloted)
+        
+        if not customer.checkOutStatus:
+            customer.computerUsedName = f'{computer.computerName}, {computer.computerLocation}'
+            customer.checkOutTime = datetime.now()
+            timeDifference = customer.checkOutTime-customer.checkInTime
+            customer.duration = duration(timeDifference)
+            customer.charge = (((int(timeDifference.total_seconds()) // 60) // 30) + 1) * charges.price
+            customer.save()
+        return render(request, 'cyber/checkoutCustomer.html', {'customer' : customer})
+
+    except:
+        return redirect('error')  
     return render(request, 'cyber/checkoutCustomer.html', {'customer' : customer})
 
 @login_required
@@ -188,6 +194,29 @@ def customerBill(request, id):
     customer= Customer.objects.get(pk=id)
     return render(request, 'cyber/customerBill.html', {'customer': customer} )
 
+
+@login_required
+def search(request):
+    if request.method == "GET":
+        query = request.GET.get('query')
+        if query:
+            allcus = Customer.objects.filter(customerName__icontains=query)
+            paginator = Paginator(allcus, 10)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+            params = {'page_obj': page_obj}
+            if allcus.count():
+                return render(request,'cyber/search.html', params)
+            else:
+                return render(request, 'cyber/search.html', {'NRF': True})
+    return render(request, 'cyber/search.html', {'bool':True})
+
+
+@login_required
+def contactUs(request):
+    return render(request, 'cyber/contactUs.html')
+
+
 @login_required
 def about(request):
-    pass
+    return render(request, 'cyber/about.html')

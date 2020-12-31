@@ -28,7 +28,7 @@
      
      {% endblock css%}
 
-    <title>Cafe Management System</title>
+    <title>Cyber Cafe Management System</title>
 
 </head>
 <body>
@@ -121,10 +121,10 @@
             </li>
         </ul>
 
-        <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text">search</i>Search</a></li>
-        <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text">assignment</i>Report</a></li>
+        <li><a href="{% url 'search' %}" class="waves-effect black-text"><i class="material-icons blue-text">search</i>Search</a></li>
+        <li><a href="{% url 'contactUs' %}" class="waves-effect black-text"><i class="material-icons blue-text">call</i>Contact Us</a></li>
         <li><div class="divider"></div></li>
-        <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">info</i>About</a></li>
+        <li><a href="{% url 'about' %}" class="waves-effect black-text"><i class="material-icons blue-text circle">info</i>About</a></li>
 
 
     </ul>

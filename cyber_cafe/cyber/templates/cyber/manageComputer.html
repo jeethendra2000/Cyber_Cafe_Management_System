@@ -100,22 +100,26 @@
             </tbody>
           </table>
           
-        <ul class="pagination center">
+        {% if NC %}
+          <h3 class="Center">No Computers Available</h3>
+        {% else %}
+          <ul class="pagination center">
 
-          {% if page_obj.has_previous %}
-          <li class="waves-effect"><a href="?page=1"><i class="material-icons">first_page</i></a></li>
-          <li class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
-          {% endif %}
+            {% if page_obj.has_previous %}
+            <li class="waves-effect"><a href="?page=1"><i class="material-icons">first_page</i></a></li>
+            <li class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+            {% endif %}
 
-          <li class="waves-effect active"><a href="#!">{{ page_obj.number }}</a></li>
-          <li><a>of</a></li>
-          <li class="waves-effect active"><a href="#!">{{ page_obj.paginator.num_pages }}</a></li>
+            <li class="waves-effect active"><a href="#!">{{ page_obj.number }}</a></li>
+            <li><a>of</a></li>
+            <li class="waves-effect active"><a href="#!">{{ page_obj.paginator.num_pages }}</a></li>
 
-          {% if page_obj.has_next %}
-          <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
-          <li class="waves-effect"><a href="?page={{ page_obj.paginator.num_pages }}"><i class="material-icons">last_page</i></a></li>
-          {% endif %}
-      </ul>
+            {% if page_obj.has_next %}
+            <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+            <li class="waves-effect"><a href="?page={{ page_obj.paginator.num_pages }}"><i class="material-icons">last_page</i></a></li>
+            {% endif %}
+          </ul>
+        {% endif %}
     </div>
 </div>
 {% endblock content %}

@@ -1,0 +1,77 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+
+{% block css %}
+
+<style>
+    .cover {
+        width: 900px;
+        margin: 0 auto;
+        font-size: 20px;
+        line-height: 2rem;
+        background-color: rgba(245, 245, 245, 0.863);
+        padding: 40px;
+        border-radius: 15px;
+        position: relative;
+        left: 150px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    span {
+        font-weight: bold;
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+    <div class="cover">
+        <h1>CYBER CAFE MANAGEMENT SYSTEM</h1>
+        <div class="intro">
+            <p>In existing system a lot of manual work has to be carried out. Large amount of paper work is involved which may cause high degree of error. Registration of user names, keeping records of user are done manually, which is time-consuming process
+                and there is possibility of making errors. </p>
+            <p>Administrator has to keep the track of time, which is tedious job. Once the user logs out, while preparing bill, he has referred to user details including name, login time and time allocated leading to possibility of causing errors in bill
+                calculation. This may be non-beneficial to administrator</p>
+            <p>Also a lot of files, records are required to store these documents thus making it difficult to maintain. Since all these reports are prepared manually, we require computer software for all these purposes.</p>
+            <p>The project entitled “<strong>Cyber Cafe Management System</strong>” is a software package, which can be used in cyber cafes for managing the clients and billing. In this system admin can briefly view total number of user come in cyber cafe,
+                add new users, update out-time, price and remarks, and view details of old users. It can also view number of users comes in cyber cafe in particular periods. </p>
+        </div>
+        <br>
+        <h1>MODULE DESCRIPTION</h1>
+        <div class="module">
+            <p>Cyber Cafe Management System has one module i.e <strong>admin</strong>.</p>
+            <ol>
+                <li><span>Dashboard:</span> In this section admin can briefly view total number of computers and total number of user come in cyber cafe.
+                </li>
+                <li><span>Computer:</span> In this section, admin can manage the computers(add/update).</li>
+                <li><span>Users:</span> In this section, admin can add new users, update outime, price and remarks, and view details of old users.
+                </li>
+                <li><span>Search:</span> In this section admin can search users on the basis of entry id.
+                </li>
+                <li><span>Profile:</span> In this section admin can update his/her profile.
+                </li>
+                <li><span>Change Password:</span> In this section admin can change his/her passwords.
+                </li>
+                <li><span>Logout:</span> Through this button admin can logout. </li>
+        </div>
+        <br>
+        <h1>OBJECTIVE</h1>
+        <div class="obj">
+            <ol>
+                <li>The aim of our system is to replace the paper works & works done manually and to automate the existing trend in the cyber cafe. Be it user creation, their management or bill generation, everything is computerized.Since the admin job is
+                    done effortlessly.
+                </li>
+                <br>
+                <li>To keep the track of time and user details including name, login time and time allocated efficiently.
+                </li>
+                <br>
+                <li>To maintain and store files, record and documents in the internal memory and retrieve whenever required.
+                </li>
+                <br>
+                <li>It makes it very easy for administrator to search details. Also time allotment is done very efficiently and it provides fast service in term of the bill calculation and time management.</li><br>
+            </ol>
+        </div>
+    </div>
+{% endblock content %}

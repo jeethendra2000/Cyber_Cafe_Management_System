@@ -1,0 +1,40 @@
+{% extends 'cyber/base.html' %}
+{% load static %}
+
+{% block css %}
+    <style>
+        .row .col .row .col{
+            margin-top: 10px;
+        }
+        .row .col .row .col button{
+            background-color: #05b31c;
+            border-radius: 30px;
+            margin-top: 25px;
+            font-weight: 500;
+        }
+        
+        .dropdown-content li>a, .dropdown-content li>span {
+            color: black;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+<!-- All Computers List -->
+<div class="row">
+    <div class="col s12 m8 push-m3">
+        <h2 class="center">Oops! Something went wrong.</h2>
+        <h3>May be one of this is reason.</h3>
+            <ul class="collection">
+                <li class="collection-item">
+                    <i class="material-icons left">check</i>
+                     You removed computer without checking out the user.
+                </li>
+                <li class="collection-item">
+                    <i class="material-icons left">check</i>
+                    You might entered wrong URL 
+                </li>
+            </ul>     
+    </div>
+</div>
+{% endblock content %}
