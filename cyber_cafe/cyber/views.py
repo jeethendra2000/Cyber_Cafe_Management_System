@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from . models import Customer, Computer, Price
+from . models import Customer, Computer, Price, Profile
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from datetime import datetime
 from django import template
+from django.contrib import messages
+from . forms import UserUpdateForm, ProfileUpdateForm
+
 
 register = template.Library()
 
@@ -29,13 +32,40 @@ def userLogin(request):
     else:
         return render(request, 'cyber/login.html')
 
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form' : u_form,
+        'p_form' : p_form
+    }
+
+    return render(request, 'cyber/profile.html', context)
+
+
 @login_required
 def userLogout(request):
     logout(request)
     return redirect('userLogin')
 
+
 def error(request):
     return render(request, 'cyber/error.html')
+
 
 @login_required
 def dashboard(request):
@@ -47,7 +77,9 @@ def dashboard(request):
         'customerCount' : customerCount,
         'price' : charges.price,
     }
+    # messages.success(request, f'account created')
     return render(request, 'cyber/dashboard.html', count)
+
 
 @login_required
 def price(request):
@@ -100,6 +132,7 @@ def updateComputer(request, id):
 
     return HttpResponseRedirect('../manageComputer')
 
+
 @login_required
 def deleteComputer(request, id):
     if request.method == 'POST':
@@ -110,6 +143,7 @@ def deleteComputer(request, id):
         else:
             return redirect('manageComputer')
     return HttpResponseRedirect('../manageComputer')
+
 
 @login_required
 def addCustomer(request):
@@ -157,6 +191,7 @@ def checkoutCustomer(request, id):
     except:
         return redirect('error')  
     return render(request, 'cyber/checkoutCustomer.html', {'customer' : customer})
+
 
 @login_required
 def checkoutConfirm(request, id):

@@ -1,0 +1,111 @@
+{% extends 'cyber/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block css %}
+
+{% endblock css %}}
+
+{% block content %}
+
+<!-- All Computers List -->
+<div class="row wrapper">
+    <div class="col s12 m8 push-m3">
+      <div class="row">
+        <h3 class="center">Profile Info</h3>
+        <div class="col s12 m7">            
+          <div class="row center">
+            <div class="col s12">
+              <img src="{{ user.profile.image.url }}" style="height: 200px;">
+              <h4>{{user.username}}</h4>
+            </div>
+          </div>
+                <div class="row">
+                    <div class="col s10 push-s1">
+                      <hr>
+                        <div class="row ">
+                          <div class="col s3">
+                              <h6>First Name</h6>
+                          </div>
+                          <div class="col s1">
+                              <h6>:</h6>
+                          </div>
+                          <div class="col s8">
+                              <h6>{{user.first_name}}</h6>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s3">
+                                <h6>Last Name</h6>
+                            </div>
+                            <div class="col s1">
+                                <h6>:</h6>
+                            </div>
+                            <div class="col s8">
+                                <h6>{{user.last_name}}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col s3">
+                              <h6>Email</h6>
+                          </div>
+                          <div class="col s1">
+                              <h6>:</h6>
+                          </div>
+                          <div class="col s8">
+                              <h6>{{user.email}}</h6>
+                          </div>
+                      </div>
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m5">
+          <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+            <h4  style="margin-bottom: 25px;" class="center">Update Profile</h4>
+            <div class="row">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">person</i>
+                          <input id="username" value="{{user.username}}" type="text" class="validate" name="username">
+                          <label for="username">Username</label>
+                        </div>
+                    <div class="input-field col s7">
+                    <i class="material-icons prefix">person</i>
+                      <input id="first_name" value="{{user.first_name}}" type="text" class="validate" name="first_name">
+                      <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s5">
+                      <input id="last_name" value="{{user.last_name}}" type="text" class="validate" name="last_name">
+                      <label for="last_name">Last Name</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">email</i>
+                      <input id="email"  value="{{user.email}}" type="email" class="validate" name="email">
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+
+                    <div class="file-field input-field">
+                      <div class="btn blue">
+                        <span style="text-transform: capitalize;">Choose File</span>
+                        <input type="file" name="image">
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate" value="{{ user.profile.image.url }}" type="text" name="image_title">
+                      </div>
+                    </div>
+                    <div class="center">
+                        <button type="submit" class="btn green">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+<!-- 
+                  
+ -->

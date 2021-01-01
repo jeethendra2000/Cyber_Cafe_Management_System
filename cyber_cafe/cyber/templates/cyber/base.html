@@ -23,6 +23,22 @@
         table.striped>tbody>tr:nth-child(odd) {
             background-color: rgba(214, 213, 213, 0.5);
         }
+        .success{
+            background-color: #28a745;
+            color: white;
+        }
+        .warning{
+            background-color: #ffc107;
+            color: black;
+        }
+        .danger{
+            background-color: #dc3545;
+            color: white;
+        }
+        .primary{
+            background-color: #007bff;
+            color: white;
+        }
      </style>
      {% block css %}
      
@@ -48,7 +64,7 @@
                 </a>
                 <!-- Dropdown Structure -->
                 <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">person</i>My Profile</a></li>
+                    <li><a href="{% url 'profile' %}" class="waves-effect black-text"><i class="material-icons blue-text circle">person</i>My Profile</a></li>
                     <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">lock</i>Change Password</a></li>
                     <li><a href="{% url 'userLogout' %}" class="waves-effect black-text"><i class="material-icons blue-text circle">exit_to_app</i>Logout</a></li>
                 </ul>
@@ -128,10 +144,28 @@
 
 
     </ul>
+        <div class="row" style="margin-bottom: 0px;">
+            <div class="col s12 m12 push-m4">
+                {% if messages %}
+                {% for message in messages %}
+                    <div class="col s12 m7 center">
+                        <div class="card horizontal">
+                            <div class="card-stacked {{ message.tags }}">
+                                <div class="card-content" style="padding: 5px;">
+                                    <h6>{{message}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    {% endif %}
+    </div>
     {% block content %}
         
     {% endblock content %}
     <div class="wrapper container">
+                
         {% block dashboard %}
         
         {% endblock dashboard %}

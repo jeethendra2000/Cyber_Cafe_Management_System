@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'materialize',
+    'crispy_forms',
+    'crispy_forms_materialize',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +143,6 @@ STATICFILES_DIRS = [
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Default layout to use with "crispy_forms"
+CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
