@@ -9,6 +9,8 @@ from django import template
 from django.contrib import messages
 from . forms import UserUpdateForm, ProfileUpdateForm
 
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 register = template.Library()
 
@@ -56,6 +58,21 @@ def profile(request):
 
     return render(request, 'cyber/profile.html', context)
 
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'cyber/change_password.html', {'form': form})
 
 @login_required
 def userLogout(request):

@@ -35,6 +35,10 @@
             background-color: #dc3545;
             color: white;
         }
+        .error{
+            background-color: #dc3545;
+            color: white;
+        }
         .primary{
             background-color: #007bff;
             color: white;
@@ -65,7 +69,7 @@
                 <!-- Dropdown Structure -->
                 <ul id='dropdown1' class='dropdown-content'>
                     <li><a href="{% url 'profile' %}" class="waves-effect black-text"><i class="material-icons blue-text circle">person</i>My Profile</a></li>
-                    <li><a href="#!" class="waves-effect black-text"><i class="material-icons blue-text circle">lock</i>Change Password</a></li>
+                    <li><a href="{% url 'change_password' %}" class="waves-effect black-text"><i class="material-icons blue-text circle">lock</i>Change Password</a></li>
                     <li><a href="{% url 'userLogout' %}" class="waves-effect black-text"><i class="material-icons blue-text circle">exit_to_app</i>Logout</a></li>
                 </ul>
             </div>
