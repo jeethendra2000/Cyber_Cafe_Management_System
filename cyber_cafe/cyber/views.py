@@ -144,7 +144,7 @@ def manageComputer(request):
     if computers.count():
         return render(request, 'cyber/manageComputer.html', {'page_obj': page_obj})
     else:
-        return render(request, 'cyber/managecomputer.html', {'NC': True})
+        return render(request, 'cyber/manageComputer.html', {'NC': True})
 
 
 @login_required
