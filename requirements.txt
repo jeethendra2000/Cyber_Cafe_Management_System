@@ -1,16 +1,9 @@
 asgiref==3.3.1
-Django==3.1.4
-#mysqlclient @ file:///D:/DBMS%20Mini-Project/mysqlclient-1.4.6-cp38-cp38-win32.whl
-mysqlclient
-Pillow==8.0.1
-pytz==2020.4
-sqlparse==0.4.1
-asgiref==3.3.1
 crispy-forms-materialize==0.2
 Django==3.1.4
 django-crispy-forms==1.10.0
 django-materialize-css==0.0.1
-mysqlclient @ file:///D:/DBMS%20Mini-Project/mysqlclient-1.4.6-cp38-cp38-win32.whl
+mysqlclient
 Pillow==8.0.1
 pytz==2020.4
 sqlparse==0.4.1

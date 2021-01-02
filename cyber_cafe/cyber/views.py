@@ -12,6 +12,13 @@ from . forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
+
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.message import EmailMessage
+
+
 register = template.Library()
 
 @register.filter
@@ -68,11 +75,10 @@ def change_password(request):
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
             return redirect('change_password')
-        else:
-            messages.error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'cyber/change_password.html', {'form': form})
+
 
 @login_required
 def userLogout(request):
@@ -106,6 +112,7 @@ def price(request):
             charges = Price.objects.get(pk=1)
             charges.price = int(temp)
             charges.save()
+            messages.success(request, f'Charges updated successfully!')
     return redirect('dashboard')
 
 
@@ -122,6 +129,8 @@ def addComputer(request):
         computerLocation = request.POST.get('computerLocation')
         obj = Computer(computerName=computerName, computerLocation=computerLocation)
         obj.save()
+        messages.success(request, f'Computer added successfully!')
+        return redirect('addComputer')
     return render(request, 'cyber/addComputer.html')
 
 
@@ -145,6 +154,7 @@ def updateComputer(request, id):
         obj.computerName = request.POST.get('computerName')
         obj.computerLocation = request.POST.get('computerLocation')
         obj.save()
+        messages.success(request, f'Computer updated successfully!')
         return redirect('manageComputer')
 
     return HttpResponseRedirect('../manageComputer')
@@ -156,8 +166,10 @@ def deleteComputer(request, id):
         obj = Computer.objects.get(pk=id)
         if obj.availability:
             obj.delete()
-            return HttpResponseRedirect('../manageComputer')
+            messages.success(request, f'Computer removed successfully!')
+            return redirect('manageComputer')
         else:
+            messages.error(request, f'Computer is in Use. Unable to remove computer!')
             return redirect('manageComputer')
     return HttpResponseRedirect('../manageComputer')
 
@@ -177,7 +189,9 @@ def addCustomer(request):
         computer.save()
         obj = Customer(customerName=name, customerAddress=address, customerPhoneNumber=ph, customerEmail=email, computerChoice=computerId, computerUsedName=computerUsed, customerIdProof=id)
         obj.save()
-        
+        messages.success(request, f'Customer added successfully!')
+        return redirect('addCustomer')
+     
     computers = Computer.objects.all()
     return render(request, 'cyber/addCustomer.html', {'computers':computers})
 
@@ -226,6 +240,7 @@ def checkoutConfirm(request, id):
         customer.checkOutStatus = True
         customer.checkInStatus = False
         customer.save()
+        messages.success(request, f'Customer checkout successfull!')
 
     return redirect('checkout')
 

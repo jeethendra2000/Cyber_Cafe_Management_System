@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 
 from django.conf.urls import url
 
-urlpatterns = [
+urlpatterns = [    
     path('error', views.error, name='error'),
     path('', views.userLogin, name='userLogin'),
     path('dashboard/profile', views.profile, name='profile'),

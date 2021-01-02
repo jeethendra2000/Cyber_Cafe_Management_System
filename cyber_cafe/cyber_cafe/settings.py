@@ -146,3 +146,14 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Default layout to use with "crispy_forms"
 CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #During Development
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'your_email@gmail.com'
+EMAIL_HOST_PASSWORD = 'your_password'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Project Team <your_email@gmail.com>'
