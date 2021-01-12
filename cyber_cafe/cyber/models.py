@@ -78,3 +78,11 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.customerName
+
+class ComputerHistory(models.Model):
+    computerId = models.IntegerField()
+    computerName = models.CharField(max_length=100, null=True, blank=False)
+    computerLocation = models.CharField(max_length=100, null=True, blank=False)
+    
+    def __str__(self):
+        return self.computerName
