@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from . models import Customer, Computer, Price, Profile
+from . models import Customer, Computer, Price, Profile, IdProof
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from datetime import datetime
@@ -182,18 +182,20 @@ def addCustomer(request):
         ph = request.POST.get('ph')
         email = request.POST.get('email')
         computerId = request.POST.get('computer')
+        idProof = request.POST.get('idProof')
         id = request.POST.get('id')
         computer = Computer.objects.get(id=computerId)
         computerUsed = f'{computer.computerName}, {computer.computerLocation}'
         computer.availability = False
         computer.save()
-        obj = Customer(customerName=name, customerAddress=address, customerPhoneNumber=ph, customerEmail=email, computerChoice=computerId, computerUsedName=computerUsed, customerIdProof=id)
+        obj = Customer(customerName=name, customerAddress=address, customerPhoneNumber=ph, customerEmail=email, computerChoice=computerId, computerUsedName=computerUsed, customerIdProof=idProof, customerIdProofNumber=id)
         obj.save()
         messages.success(request, f'Customer added successfully!')
         return redirect('addCustomer')
      
     computers = Computer.objects.all()
-    return render(request, 'cyber/addCustomer.html', {'computers':computers})
+    idProofs = IdProof.objects.all()
+    return render(request, 'cyber/addCustomer.html', {'computers':computers, 'idProofs':idProofs})
 
 
 @login_required

@@ -63,10 +63,20 @@
                     </select>
                     <label>Available Computer</label>
                   </div>
-                  <div class="input-field col s6">
+                  
+                <div class="input-field col s6">
+                  <select name="idProof" class="validate" required="" aria-required="true">
+                    <option value="" disabled selected>Select ID Proof</option>
+                    {% for idProof in idProofs %}
+                        <option value="{{idProof.idProofName}}">{{idProof.idProofName}}</option>
+                    {% endfor %}
+                  </select>
+                  <label>Id Proof</label>
+                </div>
+                  <div class="input-field col s12">
                     <i class="material-icons prefix">card_membership</i>
                     <textarea id="textarea2" class="materialize-textarea" name="id"></textarea>
-                    <label for="textarea2">Id Proof</label>
+                    <label for="textarea2">Id Number</label>
                 </div>
 
                 <div class="center">

@@ -62,6 +62,7 @@ class Customer(models.Model):
     customerPhoneNumber = models.CharField(max_length=10, null=True, blank=False)
     customerEmail = models.CharField(max_length=100, null=True, blank=True)
     customerIdProof = models.CharField(max_length=50, null=True, blank=True)
+    customerIdProofNumber = models.CharField(max_length=50, null=True, blank=True)
 
     computerChoice = models.CharField( max_length=100, null=True, blank=False)
     computerUsedName = models.CharField(max_length=50, null=True, blank=True)
@@ -86,3 +87,9 @@ class ComputerHistory(models.Model):
     
     def __str__(self):
         return self.computerName
+
+class IdProof(models.Model):
+    idProofName = models.CharField(max_length=100, null=True, blank=False)
+
+    def __str__(self):
+        return self.idProofName
